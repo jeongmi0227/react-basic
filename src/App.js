@@ -15,6 +15,7 @@ class App extends Component{
     this.state = {
       monsters: [],
     };
+
   }
   // will run whenever the component mounts
   // Mounting is the first time a component gets placed onto the top
@@ -40,6 +41,10 @@ class App extends Component{
   render() {
     return (
       <div className="App">
+        <input className='search-box' type='text' placeholder='search monsters' onChange={(event) => {
+          // console.log(event.target.value);
+          this.state.monsters.filter((monster) => event.target.value == monster);
+        }} />
         {
           // callback function 
           this.state.monsters.map((monster) => { 
