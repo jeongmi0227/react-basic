@@ -43,9 +43,15 @@ class App extends Component{
       <div className="App">
         <input className='search-box' type='text' placeholder='search monsters' onChange={(event) => {
           // console.log(event.target.value);
-          this.state.monsters.filter((monster) => event.target.value == monster);
+          const filteredMonsters = this.state.monsters.filter((monster) => {
+            return monster.name.includes(event.target.value);
+          })
+          
+          // this.state.monsters.filter((monster) => event.target.value == monster);
         }} />
         {
+
+          
           // callback function 
           this.state.monsters.map((monster) => { 
             return <div key={monster.id}><h1>{monster.name}</h1></div>;
