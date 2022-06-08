@@ -2,6 +2,7 @@ import { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
 // What is component?
 // A component is a self-contained piece of code that returns some visual UI representation of HTML,CSS,JS
 
@@ -60,7 +61,8 @@ class App extends Component{
     });
     return (
       <div className="App">
-        <input className='search-box' type='text' placeholder='search monsters' onChange={onSearchChange} />
+        <h1 className='app-title'>Monster</h1>
+        <SearchBox onChageHanlder={onSearchChange} placeholder='search monsters'className='search-box'/>
         {/* {
           // callback function 
           filteredMonsters.map((monster) => { 
