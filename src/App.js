@@ -1,5 +1,5 @@
 // import { Component } from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 // useState essentially gives us a ability to encapsulate local state in a functional component.
 import logo from './logo.svg';
 import './App.css';
@@ -9,7 +9,29 @@ import SearchBox from './components/search-box/search-box.component';
 // A component is a self-contained piece of code that returns some visual UI representation of HTML,CSS,JS
 const App = () => {
   const [searchField, setSearchField] = useState(''); //[value,setValue]
-  
+  const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
+  console.log('render');
+  // side effects can be generated from functional components using the use effect hook
+  // side effect is some behavior that we trigger from our functions that affects something that exists outside of the scope of the function.
+
+  // first is going to be a callback function, second is going to be an array of dependencies.
+  // call back is going to be the code or the fact that we want to happend inside of our functional component.
+  // second array contains different dependencies and most likely going to be state of values or prop values
+  // whenver any of the values inside of this dependency change run he useEffect function and its callback function.
+  useEffect(() => { 
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then((users) => setMonsters(users));
+  },[])
+
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
+    });
+    setFilteredMonsters(newFilteredMonsters);
+  }, [monsters, searchField]);
+
   const onSearchChange=(event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
@@ -18,7 +40,8 @@ const App = () => {
   return (
       <div className="App">
       <h1 className='app-title'>Monster</h1>
-      <SearchBox onChageHanlder={onSearchChange} placeholder='search monsters'className='search-box'/>
+      <SearchBox onChageHanlder={onSearchChange} placeholder='search monsters' className='search-box' />
+      <CardList monsters={filteredMonsters}/>
       </div>
   )
 }
