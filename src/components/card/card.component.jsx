@@ -2,8 +2,6 @@ import { Component } from "react";
 
 import './card.styles.css';
 const Card = ({ monster }) => {
-    console.log(1);
-    console.log(monster);
     const { id, name, email } = monster;
     return (
         <div className='card-container' key={id}>

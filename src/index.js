@@ -12,18 +12,15 @@ root.render(
   // StrictMode means that whatever inside of this strict mode, 
   // test two tags here, you're going to essentially add these
   // additional checks and warnings that React says in case you're using or deprecated code.
-  // <React.StrictMode>
-  <>
+<React.StrictMode>
     <App />
-  </>
-    
-  // </React.StrictMode>
+</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
 
 
 // Webpack is essentially modular being a chunk

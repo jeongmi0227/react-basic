@@ -6,17 +6,13 @@ import { Component } from "react";
 // putting import statement is for our sytling that is related to the specific components, we want to put it where that components live
 // as well as to target access so only relevant to the components code inside.
 import './search-box.styles.css';
-class SearchBox extends Component{
-    render() {
-        // console.log(this.props);
-        return (
-            <input
-                className={ this.props.className }
-                type='search'
-                placeholder={ this.props.placeholder}
-                onChange={this.props.onChageHanlder}
-            />
-        )
-    }
-}
+const SearchBox=({className,placeholder,onChageHanlder})=>(
+    <input
+        className={className}
+        type='search'
+        placeholder={placeholder}
+        onChange={onChageHanlder}
+    />
+);
+
 export default SearchBox;

@@ -36,14 +36,13 @@ const App = () => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   }
-
   return (
-      <div className="App">
+    <div className="App">
       <h1 className='app-title'>Monster</h1>
       <SearchBox onChageHanlder={onSearchChange} placeholder='search monsters' className='search-box' />
       <CardList monsters={filteredMonsters}/>
-      </div>
-  )
+    </div>
+  );
 }
 
 // pure function 
