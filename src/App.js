@@ -10,6 +10,7 @@ import SearchBox from './components/search-box/search-box.component';
 const App = () => {
   const [searchField, setSearchField] = useState(''); //[value,setValue]
   const [monsters, setMonsters] = useState([]);
+  const [title, setTitle] = useState('');
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   console.log('render');
   // side effects can be generated from functional components using the use effect hook
@@ -36,10 +37,17 @@ const App = () => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   }
+
+  const onTitleChange=(event) => {
+    const titleString = event.target.value.toLocaleLowerCase();
+    setTitle(titleString);
+  }
   return (
     <div className="App">
-      <h1 className='app-title'>Monster</h1>
+      <h1 className='app-title'>{ title}</h1>
       <SearchBox onChageHanlder={onSearchChange} placeholder='search monsters' className='search-box' />
+      <br />
+      <SearchBox onChageHanlder={onTitleChange} placeholder='set title' className='title search-box' />
       <CardList monsters={filteredMonsters}/>
     </div>
   );
