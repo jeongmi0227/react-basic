@@ -1,1 +1,3 @@
-# Complete React Developer in 2022 from Udemy
+# Complete React Developer course in 2022
+
+## React js with TypeScript
