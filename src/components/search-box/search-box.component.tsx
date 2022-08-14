@@ -1,5 +1,4 @@
-import { type } from "@testing-library/user-event/dist/type";
-import { Component } from "react";
+import { ChangeEvent,ChangeEventHandler } from "react";
 // CSS file will apply entire website not only specific to this component.
 // Other components are not protected from the styling, even though importing styling
 // One CSS is actually bundled and then put onto a website that's just as is applicable to every single components.
@@ -20,20 +19,32 @@ import './search-box.styles.css';
 // interfaces are extendable very similar to class components
 // types do not have the ability to overload and extend
 
+// type : Functional programming style of code 
+// interface: object oriented style
+
+
 // All interfaces start will I 
 // I to designate that they are a interface 
 // can extend or overloading (using same interface name)
-interface ISearchBoxProps{
+// interface ISearchBoxProps{
+//     className: string;
+//     placeholder?: string; // ? same as | null
+// }
+
+// interface ISearchBoxProps{
+//     onChageHanlder:(a:string)=>void
+// }
+// type allow us to do 'union'
+// union is a combination of types
+type SearchBoxProps={
     className: string;
-    placeholder?: string; // ? same as | null
+    placeholder?: string;
+    // func: ChangeEventHandler;
+    onChageHanlder: (event: ChangeEvent<HTMLInputElement>) => void;
 }
-
-interface ISearchBoxProps{
-    onChageHanlder:(a:string)=>void
-}
-
-
-const SearchBox=({className,placeholder,onChageHanlder}:ISearchBoxProps)=>(
+// React has a lot of types by default inside of all of these components that they've given us
+// The reason why React has typed all of these HTML by React define js components is so that we can actually use TypeScript with them
+const SearchBox=({className,placeholder,onChageHanlder}:SearchBoxProps)=>(
     <input
         className={className}
         type='search'
@@ -41,5 +52,6 @@ const SearchBox=({className,placeholder,onChageHanlder}:ISearchBoxProps)=>(
         onChange={onChageHanlder}
     />
 );
-
+// React is typed by default
+// typed means that all of these components have these type definitions and what they expected on their methods themselves.
 export default SearchBox;
