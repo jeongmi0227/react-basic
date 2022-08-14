@@ -1,8 +1,12 @@
 // import { Component } from "react";
 import './card-list.styles.css';
 import Card from "../card/card.component";
+import { Monster } from '../../App';
 
-const CardList = ({monsters}) => (
+type CardListProps = {
+    monsters: Monster[];
+}
+const CardList = ({monsters}:CardListProps) => (
     // console.log(id);
     // components will re-render based on two conditions
     // 1. when setState gets called.

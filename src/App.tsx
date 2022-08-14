@@ -1,15 +1,22 @@
 // import { Component } from 'react';
-import { useState,useEffect } from 'react';
+import { useState,useEffect,ChangeEvent } from 'react';
 // useState essentially gives us a ability to encapsulate local state in a functional component.
-import logo from './logo.svg';
+import { getData } from './utils/data.utils';
 import './App.css';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
+
+export type Monster = {
+  id: string;
+  name: string;
+  email: string;
+}
 // What is component?
 // A component is a self-contained piece of code that returns some visual UI representation of HTML,CSS,JS
 const App = () => {
   const [searchField, setSearchField] = useState(''); //[value,setValue]
-  const [monsters, setMonsters] = useState([]);
+  const [monsters, setMonsters] = useState<Monster[]>([]);
+  const [title, setTitle] = useState('');
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   console.log('render');
   // side effects can be generated from functional components using the use effect hook
@@ -20,9 +27,11 @@ const App = () => {
   // second array contains different dependencies and most likely going to be state of values or prop values
   // whenver any of the values inside of this dependency change run he useEffect function and its callback function.
   useEffect(() => { 
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then((users) => setMonsters(users));
+    const fetchUsers = async () => {
+      const users = await getData<Monster[]>('https://jsonplaceholder.typicode.com/users');
+      setMonsters(users);
+    }
+    fetchUsers();
   },[])
 
   useEffect(() => {
@@ -32,14 +41,21 @@ const App = () => {
     setFilteredMonsters(newFilteredMonsters);
   }, [monsters, searchField]);
 
-  const onSearchChange=(event) => {
+  const onSearchChange=(event:ChangeEvent<HTMLInputElement>):void => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   }
+
+  const onTitleChange=(event:ChangeEvent<HTMLInputElement>):void => {
+    const titleString = event.target.value.toLocaleLowerCase();
+    setTitle(titleString);
+  }
   return (
     <div className="App">
-      <h1 className='app-title'>Monster</h1>
+      <h1 className='app-title'>{ title}</h1>
       <SearchBox onChageHanlder={onSearchChange} placeholder='search monsters' className='search-box' />
+      <br />
+      <SearchBox onChageHanlder={onTitleChange} placeholder='set title' className='title search-box' />
       <CardList monsters={filteredMonsters}/>
     </div>
   );
